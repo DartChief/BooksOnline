@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BooksOnline</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <h1>BooksOnline</h1>
+        <p>Lightweight browser demo for the backend assignment.</p>
+    </div>
+    <button class="ghost-button" id="refresh-products" type="button">Refresh</button>
+</header>
+
+<nav class="demo-nav" aria-label="Demo sections">
+    <a href="#products">Products</a>
+    <a href="#cart">Current order</a>
+    <a href="#orders">Order lookup</a>
+    <a href="#admin-orders">All orders</a>
+</nav>
+
+<main class="layout">
+    <section class="panel" id="products">
+        <div class="section-heading">
+            <h2>Products</h2>
+            <span id="product-count">Loading...</span>
+        </div>
+        <div class="status" id="catalog-status">Loading catalog...</div>
+        <div class="product-list" id="product-list"></div>
+    </section>
+
+    <aside class="panel cart-panel" id="cart">
+        <div class="section-heading">
+            <h2>Current order</h2>
+            <button class="text-button" id="clear-cart" type="button">Clear</button>
+        </div>
+        <div class="cart-list" id="cart-list"></div>
+        <div class="cart-empty" id="cart-empty">No items selected.</div>
+        <div class="total-row">
+            <span>Total</span>
+            <strong id="cart-total">$0.00</strong>
+        </div>
+        <button class="primary-button" id="checkout" type="button" disabled>Place order</button>
+        <div class="status" id="order-status"></div>
+    </aside>
+</main>
+
+<section class="panel wide-panel" id="orders">
+    <div class="section-heading">
+        <h2>Last order / lookup</h2>
+        <span id="order-id"></span>
+    </div>
+    <form class="lookup-form" id="order-lookup-form">
+        <input id="order-lookup-id" min="1" placeholder="Order ID" type="number">
+        <button class="ghost-button" type="submit">Load order</button>
+    </form>
+    <div class="status" id="lookup-status"></div>
+    <div id="order-summary" class="detail-panel" hidden></div>
+</section>
+
+<section class="panel wide-panel" id="admin-orders">
+    <div class="section-heading">
+        <h2>All orders</h2>
+        <button class="ghost-button" id="load-orders" type="button">Load all</button>
+    </div>
+    <div class="status" id="admin-status"></div>
+    <div class="orders-list" id="orders-list"></div>
+</section>
+
+<script src="/app.js"></script>
+</body>
+</html>
