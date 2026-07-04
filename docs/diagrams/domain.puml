@@ -1,0 +1,41 @@
+@startuml
+title BooksOnline Domain Model
+
+class Product {
+  id: Long
+  name: String
+  description: String
+  price: BigDecimal
+  stock: Integer
+  type: ProductType
+}
+
+class Order {
+  id: Long
+  createdAt: Instant
+  status: OrderStatus
+  totalPrice: BigDecimal
+}
+
+class OrderItem {
+  id: Long
+  quantity: Integer
+  price: BigDecimal
+}
+
+enum ProductType {
+  BOOK
+  SOFTWARE_LICENSE
+  VOUCHER
+}
+
+enum OrderStatus {
+  PAID
+}
+
+Order "1" *-- "1..*" OrderItem
+OrderItem "*" --> "1" Product
+Product --> ProductType
+Order --> OrderStatus
+
+@enduml

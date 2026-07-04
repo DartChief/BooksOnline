@@ -1,0 +1,27 @@
+@startuml
+title Order Purchase Sequence
+
+actor Customer
+participant OrderController
+participant OrderService
+participant ProductRepository
+participant OrderRepository
+database PostgreSQL
+
+Customer -> OrderController : POST /api/orders
+OrderController -> OrderService : createOrder(request)
+OrderService -> OrderService : aggregate quantities
+OrderService -> ProductRepository : findAllForUpdate(productIds)
+ProductRepository -> PostgreSQL : SELECT products FOR UPDATE
+PostgreSQL --> ProductRepository : locked products
+ProductRepository --> OrderService : products
+OrderService -> OrderService : validate stock and calculate total
+OrderService -> ProductRepository : saveAll(updated products)
+ProductRepository -> PostgreSQL : update stock
+OrderService -> OrderRepository : save(order)
+OrderRepository -> PostgreSQL : insert order and items
+OrderRepository --> OrderService : saved order
+OrderService --> OrderController : OrderResponseDto
+OrderController --> Customer : 201 Created
+
+@enduml

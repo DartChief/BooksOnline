@@ -1,0 +1,32 @@
+@startuml
+title BooksOnline Component Diagram
+
+actor Customer
+actor "Shop Owner" as Owner
+
+rectangle "BooksOnline API" {
+  [ProductController]
+  [OrderController]
+  [AdminOrderController]
+  [ProductService]
+  [OrderService]
+  [ProductRepository]
+  [OrderRepository]
+}
+
+database PostgreSQL
+
+Customer --> [ProductController] : browse products
+Customer --> [OrderController] : create/track orders
+Owner --> [AdminOrderController] : view all orders
+
+[ProductController] --> [ProductService]
+[OrderController] --> [OrderService]
+[AdminOrderController] --> [OrderService]
+[ProductService] --> [ProductRepository]
+[OrderService] --> [ProductRepository]
+[OrderService] --> [OrderRepository]
+[ProductRepository] --> PostgreSQL
+[OrderRepository] --> PostgreSQL
+
+@enduml
